@@ -44,17 +44,42 @@ This project gives everyone — beginners and advanced — meaningful tasks to w
 
 By the end of PatchFest, contributors will turn this starter into a functional backend API system with:
 
-- ✔ CRUD routes (create, read, update, delete data)
-- ✔ A storage layer (JSON or database)
-- ✔ Input validation
-- ✔ Error handling
-- ✔ Logging system
-- ✔ Rate limiting
-- ✔ A `/metrics` endpoint
-- ✔ API documentation (Swagger/OpenAPI)
-- ✔ Automated tests and CI workflows
+- ✔ Basic project structure (folders and starter files)
+- [ ] CRUD routes (create, read, update, delete data)
+- [ ] A storage layer (JSON or database)
+- [ ] Input validation
+- [ ] Error handling
+- [ ] Logging system
+- [ ] Rate limiting
+- [ ] A `/metrics` endpoint
+- [ ] API documentation (Swagger/OpenAPI)
+- [ ] Automated tests and CI workflows
 
 Each of these features will be added through the issues already listed in this repository.
+
+---
+
+## 🏗️ Project Structure
+
+The backend is organized with a clean folder structure:
+
+```
+patchfest/
+│
+├── src/                  # Source code directory
+│   └── server.js         # Main Express server file
+│
+├── .gitignore           # Git exclusions
+├── package.json         # Dependencies and scripts
+└── README.md            # Project documentation
+```
+
+### Key Components:
+- **src/server.js** → Main server entry point with Express setup
+- **Hello World endpoint** → Root route returns welcome message
+- **Health check** → `/health` route for server status monitoring
+- **.gitignore** → Excludes node_modules and sensitive files
+- **package.json** → Project metadata and npm scripts
 
 ---
 
