@@ -1,5 +1,6 @@
 import express from "express";
 import routes from "./routes/index.js";
+import { storageManager, StorageFactory } from "./utils/storageFactory.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -50,27 +51,45 @@ app.use(async (req, res) => {
     availableEndpoints: [
       'GET /',
       'GET /health', 
+      'GET /api/storage/health',
       'GET /api/storage/stats',
+      'GET /api/storage/backup',
+      'DELETE /api/storage/clear',
       'GET /api/storage/{collection}',
       'POST /api/storage/{collection}',
+      'GET /api/storage/{collection}/{id}',
       'PUT /api/storage/{collection}/{id}',
       'DELETE /api/storage/{collection}/{id}'
     ]
   });
 });
 
-// Async server startup
+// Async server startup with storage initialization
 const startServer = async () => {
   try {
+    // Initialize storage with environment-based selection
+    console.log('🔄 Initializing storage...');
+    const storageConfig = StorageFactory.getConfig();
+    console.log('📋 Storage configuration:', {
+      type: storageConfig.detectedType,
+      environment: storageConfig.nodeEnv
+    });
+    
+    await storageManager.init();
+    console.log('✅ Storage initialized successfully');
+    
+    // Start Express server
     app.listen(PORT, () => {
-      console.log(`🚀 Async Server running on http://localhost:${PORT}`);
+      console.log(`🚀 Server running on http://localhost:${PORT}`);
       console.log(`📊 Health check: http://localhost:${PORT}/health`);
       console.log(`💾 Storage API: http://localhost:${PORT}/api/storage`);
       console.log(`📈 Stats: http://localhost:${PORT}/api/storage/stats`);
-      console.log('✅ All operations using async/await with fs.promises');
+      console.log(`🔄 Storage type: ${storageConfig.detectedType.toUpperCase()}`);
+      console.log('✅ Server ready with storage adapter pattern');
     });
   } catch (error) {
     console.error('❌ Failed to start server:', error.message);
+    console.error('💡 Try setting STORAGE_TYPE=memory for fallback');
     process.exit(1);
   }
 };
