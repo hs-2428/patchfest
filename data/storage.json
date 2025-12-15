@@ -1,0 +1,41 @@
+{
+  "users": [
+    {
+      "id": "async_user_1",
+      "name": "Async Alice",
+      "email": "alice@async.example",
+      "role": "developer",
+      "createdAt": "2025-12-15T12:00:00.000Z",
+      "updatedAt": "2025-12-15T12:00:00.000Z"
+    },
+    {
+      "id": "1765820126358ps0wkpeo9",
+      "name": "Async Bob",
+      "email": "bob@async.test",
+      "createdAt": "2025-12-15T17:35:26.359Z",
+      "updatedAt": "2025-12-15T17:35:26.359Z"
+    }
+  ],
+  "posts": [
+    {
+      "id": "async_post_1",
+      "title": "Welcome to Async Storage",
+      "content": "This post demonstrates the new async storage system with fs.promises!",
+      "authorId": "async_user_1",
+      "status": "published",
+      "createdAt": "2025-12-15T12:00:00.000Z",
+      "updatedAt": "2025-12-15T12:00:00.000Z"
+    }
+  ],
+  "comments": [],
+  "metadata": {
+    "created": "2025-12-15T12:00:00.000Z",
+    "version": "2.0.0",
+    "storageType": "async",
+    "features": [
+      "fs.promises",
+      "async/await",
+      "error handling"
+    ]
+  }
+}
