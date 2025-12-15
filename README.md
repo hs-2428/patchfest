@@ -80,17 +80,80 @@ patchfest/
 ## 🚀 How to Run the Project
 
 1. Install dependencies:
+```bash
 npm install
+```
 
 2. Start the server:
+```bash
 npm start
+```
 
-3. Open the health check endpoint:
-http://localhost:3000/health
+3. Test the API endpoints:
 
-If you see:
-{ "ok": true }
-the backend is running successfully.
+**Health Check:**
+```bash
+curl http://localhost:3000/health
+```
+
+**Storage API Examples:**
+```bash
+# Get all users
+curl http://localhost:3000/api/storage/users
+
+# Create a new user
+curl -X POST http://localhost:3000/api/storage/users \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Jane Doe", "email": "jane@example.com"}'
+
+# Get a user by ID
+curl http://localhost:3000/api/storage/users/{id}
+
+# Update a user
+curl -X PUT http://localhost:3000/api/storage/users/{id} \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Jane Smith"}'
+
+# Delete a user
+curl -X DELETE http://localhost:3000/api/storage/users/{id}
+
+# Get storage statistics
+curl http://localhost:3000/api/storage/stats
+```
+
+If you see successful JSON responses, the backend is running correctly!
+
+---
+
+## 💾 Data Storage System
+
+The backend now includes a **JSON file storage system** with full CRUD operations:
+
+### Storage Method: JSON File
+- **Location:** `data/storage.json`
+- **Collections:** users, posts, comments
+- **Features:** Auto-generated IDs, timestamps, error handling
+
+### Available API Endpoints:
+- `GET /api/storage/{collection}` - Get all records
+- `GET /api/storage/{collection}/{id}` - Get record by ID
+- `POST /api/storage/{collection}` - Create new record
+- `PUT /api/storage/{collection}/{id}` - Update record
+- `DELETE /api/storage/{collection}/{id}` - Delete record
+- `GET /api/storage/stats` - Get storage statistics
+
+### Error Handling:
+- ✅ File access errors
+- ✅ JSON parsing errors
+- ✅ Collection validation
+- ✅ Record not found errors
+- ✅ Invalid request data
+
+### Setup Instructions:
+1. The storage file is auto-created on first use
+2. Initial data includes sample users and posts
+3. All operations include automatic timestamps
+4. IDs are auto-generated for new records
 
 ---
 
@@ -110,10 +173,10 @@ This workflow teaches open-source collaboration.
 
 ## 🗂️ Roadmap
 
-- [ ] Add CRUD API routes  
-- [ ] Add JSON/database storage layer  
+- [x] Add CRUD API routes  
+- [x] Add JSON/database storage layer  
 - [ ] Add input validation  
-- [ ] Add proper error handling  
+- [x] Add proper error handling  
 - [ ] Add logging  
 - [ ] Add rate limiting  
 - [ ] Add metrics endpoint  
